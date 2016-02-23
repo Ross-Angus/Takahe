@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description>This section of the site has a list of tutorials to extent Takahē.</description>
+		<path>/how-to/</path>
+	</meta>
+	<content type="main">
+		<h1>How to guide</h1>
+		<p>This section of the site has a list of tutorials to extent Takahē.</p>
+	</content>
+</page>

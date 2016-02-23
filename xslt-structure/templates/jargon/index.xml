@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/jargon/</path>
+	</meta>
+	<content type="main">
+		<h1>jargon</h1>
+		<p><code>jargon</code> is an example of a template which replaces <jargon type="XML"/> which is inside content, with more complicated markup. The <jargon type="XML"/> in question is something like this:</p>
+		<pre><code class="html">&lt;jargon type="XML"/&gt;</code></pre>
+		<p>When I was documenting this site, I found I was typing out the abbreviation tag quite a lot, which was tedious. So I wrote a template to take care of it for me:</p>
+		<pre><code class="html">&lt;xsl:template match="jargon" mode="content"&gt;
+	&lt;!-- The user can type in &lt;jargon type="HTML"/&gt; or &lt;jargon type="html"/&gt;, or any mix of the two.
+	Note that the case used in the type attribute will be output unchanged into the page. --&gt;
+	&lt;xsl:variable name="type"&gt;&lt;xsl:value-of select="translate(@type,$lower,$upper)"/&gt;&lt;/xsl:variable&gt;
+	&lt;!-- This tracks how many jargon tags of each type are on the page. --&gt;
+	&lt;xsl:variable name="jargon-order"&gt;&lt;xsl:number count="jargon[@type = $type]" level="any"/&gt;&lt;/xsl:variable&gt;
+	&lt;abbr&gt;
+		&lt;!-- Best practice suggests that for the benefit of speech browsers, only the first
+		instance of a particular &lt;abbr/&gt; should have the abbreviation spelt out to the user.
+		After that point, having the string wrapped in an &lt;abbr/&gt; will stop the speech
+		browser from trying to pronounce the string out loud. --&gt;
+		&lt;xsl:if test="$jargon-order = 1"&gt;
+			&lt;xsl:attribute name="title"&gt;
+				&lt;xsl:choose&gt;
+					&lt;xsl:when test="$type = 'HTML'"&gt;HyperText Markup Language&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'XHTML'"&gt;Extensible Hypertext Markup Language&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'CSS'"&gt;Cascading Style Sheet&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'XSLT'"&gt;Extensible Stylesheet Language Transformations&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'XML'"&gt;Extensible Markup Language&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'HTTP'"&gt;HyperText Transfer Protocol&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'URI'"&gt;Uniform Resource Identifier&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'URL'"&gt;Uniform Resource Locator&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'ISO'"&gt;International Organization for Standardization&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'IE'"&gt;Internet Explorer&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'SEO'"&gt;Search Engine Optimisation&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'CMS'"&gt;Content Management System&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'MIT'"&gt;Massachusetts Institute of Technology&lt;/xsl:when&gt;
+					&lt;xsl:when test="$type = 'CDN'"&gt;Content Delivery Network&lt;/xsl:when&gt;
+				&lt;/xsl:choose&gt;
+			&lt;/xsl:attribute&gt;
+		&lt;/xsl:if&gt;
+		&lt;xsl:value-of select="@type"/&gt;
+	&lt;/abbr&gt;
+&lt;/xsl:template&gt;</code></pre>
+
+	<p>Note that some acronyms have more than one interpretation. The disadvantage of this approach is that only one expansion of the abbreviation is supported, and also that content is embedded in code.</p>
+
+	</content>
+</page>

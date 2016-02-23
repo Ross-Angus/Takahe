@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<path>/faq/</path>
+	</meta>
+	<content type="main">
+		<h1>Frequently asked questions</h1>
+		<faqs>
+			<faq>
+				<question>Do any big sites use client-side <jargon type="XSLT"/>?</question>
+				<answer>The only one I could find was <a href="http://www.skechers.co.uk/">Skechers</a>. Even <a href="http://www.jenitennison.com/xslt/">Jeni Tennison</a><note>... who taught me pretty much everything I know about <jargon type="XSLT"/></note> has turned her client-side <jargon type="XSLT"/> pages into <jargon type="XHTML"/>.</answer>
+			</faq>
+			<faq>
+				<question>What browsers does this work on?</question>
+				<answer>Client-side <jargon type="XSLT"/> <a href="http://stackoverflow.com/questions/841238/client-side-xslt">goes way back to <jargon type="IE"/>6</a>. <a href="http://stackoverflow.com/questions/9847395/using-client-side-xslt-transformations-in-the-html5-era">Mobile support is supposed to be pretty good too</a>.</answer>
+			</faq>
+			<faq>
+				<question>What's client-side <jargon type="XSLT"/> like for accessibility?</question>
+				<answer>I've no idea. Devices and tools change rapidly, and <a href="https://www.google.co.uk/search?q=client-side+XSLT+and+accessibility">most of the data about this subject is over ten years old</a>.</answer>
+			</faq>
+			<faq>
+				<question>What's client-side <jargon type="XSLT"/> like for <jargon type="SEO"/>?</question>
+				<answer>I've no idea. <a href="https://www.google.co.uk/search?q=skechers">The aforementioned Skechers</a> seem to do OK. <a href="https://www.google.co.uk/search?q=skechers+sport">Searches can also reach inside pages</a>.</answer>
+			</faq>
+			<faq>
+				<question>Isn't <jargon type="XSLT"/> a dead language?</question>
+				<answer>While some <jargon type="CMS"/>s are moving away from <jargon type="XSLT"/>, there are still situations where parsing a file using <jargon type="XSLT"/> will be much more efficient than string manipulation. Elsewhere, <jargon type="JSON"/> is being used in preference to <jargon type="XML"/>. Many people feel that each data format has it's advantages and disadvantages, and do slightly different jobs.</answer>
+			</faq>
+			<faq>
+				<question>What are the drawbacks of client-side <jargon type="XSLT"/>?</question>
+				<answer><a href="http://programmers.stackexchange.com/users/11746/kornel">Kornel's</a> <a href="http://programmers.stackexchange.com/questions/30255/what-are-the-drawbacks-of-sending-xml-to-browsers-and-let-them-apply-xslt#answer-30275">answer on Stackexchange is quite comprehensive</a>. I'm not really qualified to dispute it.</answer>
+			</faq>
+			<faq>
+				<question>How do you pronounce <q>Takahē</q>?</question>
+				<answer>According to <a href="https://youtu.be/5Pr1Ppa1XLA?t=34s">this video</a>, <q>tah-kah-hee</q>. But I don't know. It might just be her accent.</answer>
+			</faq>
+			<faq>
+				<question>What does <q>Takahē</q> mean?</question>
+				<answer><a href="https://en.wikipedia.org/wiki/Takah%C4%93">Takahē</a> is a flightless bird from New Zealand which was <em>thought</em> to be extinct, but which turned out to be very much alive. METAPHOR.</answer>
+			</faq>
+			<faq>
+				<question>Your <jargon type="CSS"/> transitions. They're <em>horrible</em>.</question>
+				<answer>Sorry.</answer>
+			</faq>
+		</faqs>
+	</content>
+</page>

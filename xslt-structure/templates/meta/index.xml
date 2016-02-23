@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/meta/</path>
+	</meta>
+	<content type="main">
+		<h1>meta</h1>
+		<p>The <code>meta</code> template has to handle a lot of potential information in <code>global.xml</code>, so is quite long. I'll break it down bit-by-bit.</p>
+		<pre><code class="html">&lt;xsl:template match="meta" mode="meta"&gt;
+	&lt;xsl:param name="url"/&gt;
+
+	&lt;xsl:variable name="site-title" select="document('&amp;global-path;')/global/meta/site-title"/&gt;</code></pre>
+
+	<p>The <code>$site-title</code> is a string taken from <code>global.xml</code>.</p>
+
+	<pre><code class="html">	&lt;xsl:variable name="page-title"&gt;
+		&lt;xsl:choose&gt;
+			&lt;!-- Do we have a page title in the page XML file? --&gt;
+			&lt;xsl:when test="normalize-space(title) != ''"&gt;
+				&lt;xsl:value-of select="title"/&gt;
+			&lt;/xsl:when&gt;
+			&lt;!-- Otherwise get it from the navigation XML --&gt;
+			&lt;xsl:otherwise&gt;
+				&lt;xsl:value-of select="document('&amp;global-path;')//link[@url = $url]/@text"/&gt;
+			&lt;/xsl:otherwise&gt;
+		&lt;/xsl:choose&gt;
+	&lt;/xsl:variable&gt;</code></pre>
+
+	<p>The <code>$page-title</code> is a string taken from the local page.</p>
+
+	<pre><code class="html">	&lt;title&gt;
+		&lt;xsl:value-of select="$page-title"/&gt;
+		&lt;!-- Does the site itself have a title? Is it different to the current page title? --&gt;
+		&lt;xsl:if test="normalize-space($site-title) != '' and normalize-space($site-title) != normalize-space($page-title)"&gt;
+			 - &lt;xsl:value-of select="normalize-space($site-title)"/&gt;
+		&lt;/xsl:if&gt;
+	&lt;/title&gt;</code></pre>
+
+	<p>I test to see if the site title is the same as the current page title, to avoid repetition.</p>
+
+	<pre><code class="html">	&lt;!-- Description - used in multiple places --&gt;
+	&lt;xsl:variable name="description"&gt;
+		&lt;xsl:choose&gt;
+			&lt;!-- Does the description node exist in the page level xml?
+			Note that it's valid for this node to exist and be blank -
+			this means that no description should be displayed. --&gt;
+			&lt;xsl:when test="normalize-space(description) != ''"&gt;&lt;xsl:value-of select="description"/&gt;&lt;/xsl:when&gt;
+			&lt;!-- Does global.xml have a description? --&gt;
+			&lt;xsl:when test="normalize-space(document('&amp;global-path;')/global/meta/description) != ''"&gt;
+				&lt;xsl:value-of select="document('&amp;global-path;')/global/meta/description"/&gt;
+			&lt;/xsl:when&gt;
+		&lt;/xsl:choose&gt;
+	&lt;/xsl:variable&gt;</code></pre>
+
+	<p>The <code>$description</code> could come from the local page, or from <code>global.xml</code>. Obviously, having custom descriptions for each page is better.</p>
+
+	<pre><code class="html">	&lt;!-- You don't *have* to add a description --&gt;
+	&lt;xsl:if test="normalize-space($description) != ''"&gt;
+		&lt;meta name="description" content="{$description}"/&gt;
+		&lt;meta property="og:description" content="{$description}"/&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p>Both description <code>meta</code> tags are written to the page.</p>
+
+	<pre><code class="html">	&lt;xsl:if test="normalize-space($page-title) != ''"&gt;
+		&lt;meta property="og:title" content="{$page-title}"/&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p><code>$title</code> is reused, for Facebook and other social media sites.</p>
+
+	<pre><code class="html">	&lt;xsl:variable name="base-url"&gt;
+		&lt;xsl:if test="normalize-space(document('&amp;global-path;')/global/meta/base-url) != ''"&gt;
+			&lt;xsl:value-of select="document('&amp;global-path;')/global/meta/base-url"/&gt;
+		&lt;/xsl:if&gt;
+	&lt;/xsl:variable&gt;</code></pre>
+
+	<p>The base <jargon type="URL"/> of the page is added from data in <code>global.xml</code>.</p>
+
+	<pre><code class="html">	&lt;xsl:if test="normalize-space(document('&amp;global-path;')/global/meta/open-graph-type) != ''"&gt;
+		&lt;meta property="og:type" content="{normalize-space(document('&amp;global-path;')/global/meta/open-graph-type)}"/&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p>The <a href="http://ogp.me/">Open Graph</a> type is added. Please see the Open Graph site, for a list of other possible values.</p>
+
+	<pre><code class="html">	&lt;xsl:if test="normalize-space($base-url) != ''"&gt;
+		&lt;meta property="og:url"&gt;
+			&lt;xsl:attribute name="content"&gt;
+				&lt;!-- From the global variables --&gt;
+				&lt;xsl:value-of select="$base-url"/&gt;
+				&lt;!-- From the local file --&gt;
+				&lt;xsl:value-of select="path"/&gt;
+			&lt;/xsl:attribute&gt;
+		&lt;/meta&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p>The <jargon type="URL"/> of the page is built up, from data in <code>global.xml</code> and the local file.</p>
+
+	<pre><code class="html">	&lt;xsl:if test="normalize-space(document('&amp;global-path;')/global/meta/site-image) != ''"&gt;
+		&lt;meta property="og:image" content="{$base-url}{normalize-space(document('&amp;global-path;')/global/meta/site-image)}"/&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p>The Open Graph image is added, if it exists in <code>global.xml</code>. This image should be at least 200 X 200 pixels. Ideally 1,200 X 630 pixels. The image is used by <em>Facebook</em>, <em>Twitter</em> and <em>Google+</em>.</p>
+
+	<pre><code class="html">	&lt;xsl:if test="normalize-space($site-title) != ''"&gt;
+		&lt;meta property="og:site_name" content="{$site-title}"/&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p>The Open Graph site name of the page is added, if it exists in <code>global.xml</code>.</p>
+
+	<pre><code class="html">	&lt;xsl:if test="normalize-space(document('&amp;global-path;')/global/meta/facebook-id) != ''"&gt;
+		&lt;meta property="fb:admins" content="{normalize-space(document('&amp;global-path;')/global/meta/facebook-id)}"/&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p>The Facebook <abbr title="administrators">admins</abbr> meta tag is added, if it exists in <code>global.xml</code>. <a href="http://findmyfbid.com/">You can find your Facebook <abbr title="Identification">ID</abbr> using this tool</a>.</p>
+
+	<pre><code class="html">	&lt;xsl:if test="normalize-space(document('&amp;global-path;')/global/meta/charset) != ''"&gt;
+		&lt;meta charset="{normalize-space(document('&amp;global-path;')/global/meta/charset)}"/&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p>The meta character set of the page is added, if it exists in <code>global.xml</code>.</p>
+
+	<pre><code class="html">	&lt;xsl:if test="normalize-space(document('&amp;global-path;')/global/meta/viewport) != ''"&gt;
+		&lt;meta name="viewport" content="{normalize-space(document('&amp;global-path;')/global/meta/viewport)}"/&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p>The meta viewport of the page is added, if it exists in <code>global.xml</code>.</p>
+
+	<pre><code class="html">	&lt;xsl:if test="normalize-space(document('&amp;global-path;')/global/meta/X-UA-Compatible) != ''"&gt;
+		&lt;meta http-equiv="X-UA-Compatible" content="{normalize-space(document('&amp;global-path;')/global/meta/X-UA-Compatible)}"/&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p>The meta tag which tells <jargon type="IE"/> to use it's most up-to-date rendering engine is added, if it exists in <code>global.xml</code>.</p>
+
+	<pre><code class="html">	&lt;xsl:if test="normalize-space(document('&amp;global-path;')/global/meta/HandheldFriendly) != ''"&gt;
+		&lt;meta name="HandheldFriendly" content="{normalize-space(document('&amp;global-path;')/global/meta/HandheldFriendly)}"/&gt;
+	&lt;/xsl:if&gt;</code></pre>
+
+	<p>The hand held friendly meta is added, if it exists in <code>global.xml</code>.</p>
+
+	<pre><code class="html">&lt;/xsl:template&gt;</code></pre>
+
+	<p>Template ends.</p>
+	</content>
+</page>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<path>/navigation/sub/</path>
+	</meta>
+	<content type="main">
+		<h1>Sub navigation</h1>
+		<p>The sub-navigation appears to the right of this content, and is a bit more legible when you mouse is over it.</p>
+		<p>The sub-navigation displays all child links from the current top-level section the user is in. The name of the current top-level page is added above the sub-navigation, as a heading.</p>
+		<p>If the user is inside one of these second-level pages, their location will be indicated by an <code>emphasis</code> tag. If there is third-level navigation to show, it is only shown if it is either the immediate child of the current page, or the user has drilled sufficiently far down the navigation tree for it to be an ancestor or a sibling.</p>
+		<p>The sub-navigation will display all siblings and ancestors of the current page. It will not show "cousins" of the current page.</p>
+		<p>The sub navigation is controlled by <a href="/xslt-structure/templates/sub-nav/">the <code>sub-nav</code> template</a>.</p>
+	</content>
+</page>

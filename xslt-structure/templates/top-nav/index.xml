@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/top-nav/</path>
+	</meta>
+	<content type="main">
+		<h1>top-nav</h1>
+		<p><code>top-nav</code> writes out the top level of a given type of navigation in <code>global.xml</code>. It generates nested, unordered lists which, when combined with <jargon type="CSS"/>, can be styled.</p>
+		<p>For example, <code>top-nav</code> is used to generate the main navigation, the <jargon type="XML"/> for which looks like this:</p>
+		<pre><code class="html">&lt;nav type="main" title="Main navigation"&gt;
+	&lt;link url="/" text="Home"/&gt;
+	...
+&lt;/nav&gt;</code></pre>
+		<p>However, the same XSLT can be applied to a completely different set of nodes, depending upon how it is called in the <a href="/xslt-structure/wireframes/">page wireframe</a>. This code block pulls in the set of navigation with a <code>type</code> of <code>main</code>:</p>
+		<pre><code class="html">&lt;!-- Top navigation --&gt;
+&lt;xsl:apply-templates select="document('&amp;global-path;')/global/nav[@<strong>type = 'main'</strong>]" mode="top-nav"&gt;
+	&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="/page/meta/path"/&gt;&lt;/xsl:with-param&gt;
+&lt;/xsl:apply-templates&gt;</code></pre>
+		<p>Exactly the same <jargon type="XSLT"/> can be used to add markup to a completely different set of <jargon type="XML"/>, and even add a <code>class</code> onto it.</p>
+
+		<h2><jargon type="XML"/>:</h2>
+		<pre><code class="html">&lt;nav <strong>type="footer"</strong> title="Footer navigation" class="list-inline"&gt;
+	&lt;link url="/legal/" text="Terms of use"/&gt;
+	&lt;link url="http://www.realise.com/" text="Realise" target="_blank"/&gt;
+	&lt;link url="/faq/" text="Frequently asked questions"/&gt;
+&lt;/nav&gt;</code></pre>
+
+		<h2>Call to the <jargon type="XSLT"/>:</h2>
+		<pre><code class="html">&lt;!-- Footer navigation --&gt;
+&lt;xsl:apply-templates select="document('&amp;global-path;')/global/nav[@<strong>type = 'footer'</strong>]" mode="top-nav"&gt;
+	&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="/page/meta/path"/&gt;&lt;/xsl:with-param&gt;
+&lt;/xsl:apply-templates&gt;</code></pre>
+
+		<h2>The <code>top-nav</code> template</h2>
+		<p>The <jargon type="XSL"/> below only generates the top level of the navigation. The templates <a href="/xslt-structure/templates/paternity-test/"><code>paternity-test</code></a> and <a href="/xslt-structure/templates/top-nav/next-nav/"><code>next-nav</code></a> are required, to complete the navigation.</p>
+		<pre><code class="html">&lt;xsl:template match="nav" mode="top-nav"&gt;
+	&lt;xsl:param name="url"/&gt;
+	&lt;nav aria-label="{@title}" itemscope="" itemtype="https://schema.org/SiteNavigationElement"&gt;
+		&lt;xsl:if test="normalize-space(@class) != ''"&gt;
+			&lt;xsl:attribute name="class"&gt;&lt;xsl:value-of select="@class"/&gt;&lt;/xsl:attribute&gt;
+		&lt;/xsl:if&gt;
+		&lt;ul&gt;
+			&lt;!-- Just the top-level navigation --&gt;
+			&lt;xsl:for-each select="link"&gt;
+				&lt;li&gt;
+					&lt;xsl:call-template name="paternity-test"&gt;
+						&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="$url"/&gt;&lt;/xsl:with-param&gt;
+					&lt;/xsl:call-template&gt;
+					&lt;xsl:call-template name="next-nav"&gt;
+						&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="$url"/&gt;&lt;/xsl:with-param&gt;
+						&lt;xsl:with-param name="top-level"&gt;true&lt;/xsl:with-param&gt;
+					&lt;/xsl:call-template&gt;
+				&lt;/li&gt;
+			&lt;/xsl:for-each&gt;
+		&lt;/ul&gt;
+	&lt;/nav&gt;
+&lt;/xsl:template&gt;</code></pre>
+	</content>
+</page>

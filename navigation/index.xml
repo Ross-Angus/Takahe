@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<path>/navigation/</path>
+	</meta>
+	<content type="main">
+		<h1>Navigation</h1>
+		<p>All navigation data is in <a href="/data-structure/site/"><code>global.xml</code></a>. As this data is available to the <jargon type="XSLT"/>, it can be manipulated in a variety of ways. The main way this is done, is by comparing the navigation with the path to the current page.</p>
+		<p>Unfortunately, due to the restrictions of <jargon type="XSLT"/> 1, this string needs to be added manually to each page <jargon type="XML"/> file.</p>
+	</content>
+</page>

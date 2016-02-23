@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/sub-nav/</path>
+	</meta>
+	<content type="main">
+		<h1>sub-nav</h1>
+		<p>The sub-navigation of the site is assumed to be the second level of navigation. <code>sub-nav</code> will write out all of the relevant child links of whichever top-level section of the site the user is currently in.</p>
+		<p>This means that if the user is five pages deep in the site, the sub-navigation needs to write out:</p>
+		<ul>
+			<li>The current page</li>
+			<li>Any of the current page's siblings</li>
+			<li>All of the current page's ancestors (up to, but not including, the top level of navigation)</li>
+		</ul>
+		<p>If there are other pages which branch off the ancestors, they should <em>not</em> be written out. The user will see only those pages which are relevant.</p>
+		<p>Confusingly, there are two templates called <code>sub-nav</code>. One has <code>sub-nav</code> in the <code>name</code> attribute, where as the other has it in the <code>mode</code> attribute. The <code>mode</code> attribute works a little like the <code>class</code> attribute in <jargon type="CSS"/>: it allows one particular template to take over the rendering of an element, when there is competition between other templates.</p>
+		<h2>sub-nav as mode</h2>
+		<p>The first <code>sub-nav</code> template only matches the top-level links. As we don't want any of these links to appear on the side navigation (your needs might vary), then it does little, apart from check for children, then call the second <code>sub-nav</code>.</p>
+		<pre><code class="html">&lt;xsl:template match="nav" mode="sub-nav"&gt;
+	&lt;xsl:param name="url"/&gt;
+
+		&lt;!-- Top level links only --&gt;
+		&lt;xsl:for-each select="link"&gt;
+			&lt;!-- We don't want to write out the top level links: this
+			template is only intended to write out the second level
+			links and downward. --&gt;
+			&lt;xsl:if test="descendant-or-self::link[@url = $url]"&gt;
+				&lt;h2 class="h4"&gt;&lt;xsl:value-of select="@text"/&gt;&lt;/h2&gt;
+				&lt;xsl:call-template name="sub-nav"&gt;
+					&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="$url"/&gt;&lt;/xsl:with-param&gt;
+				&lt;/xsl:call-template&gt;
+			&lt;/xsl:if&gt;
+		&lt;/xsl:for-each&gt;
+
+&lt;/xsl:template&gt;</code></pre>
+
+		<h2>sub-nav as name</h2>
+		<p>The second <code>sub-nav</code> template matches all subsequent nested <code>link</code> elements. It's called recursively, like the main navigation, so the same markup can keep being output for as long as there are <code>link</code> nodes in the navigation.</p>
+		<p>I reuse <a href="/xslt-structure/templates/paternity-test/"><code>paternity-test</code></a> from the main navigation, to add <code>emphasis</code> tags (or not) around the links.</p>
+		<p>The <code>if</code> test around the recursive template call checks to see where the current <code>link</code> node is in the navigation. Using the <code>ancestor::</code> axis, we can see how many nodes are between the current node and the <code>nav</code> node. Remember that <jargon type="XSLT"/> starts counting from 1, not zero!</p>
+		<pre><code class="html">&lt;xsl:template match="link" name="sub-nav"&gt;
+	&lt;xsl:param name="url"/&gt;
+	&lt;ul&gt;
+		&lt;xsl:for-each select="link"&gt;
+			&lt;li&gt;
+				&lt;xsl:call-template name="paternity-test"&gt;
+					&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="$url"/&gt;&lt;/xsl:with-param&gt;
+				&lt;/xsl:call-template&gt;
+				&lt;!-- If we're in the second level of navigation, only write out the third
+				level if the current page appears inside it. --&gt;
+				&lt;xsl:if test="count(ancestor::*) &gt; 2 and descendant-or-self::link[@url = $url]"&gt;
+					&lt;xsl:call-template name="sub-nav"&gt;
+						&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="$url"/&gt;&lt;/xsl:with-param&gt;
+					&lt;/xsl:call-template&gt;
+				&lt;/xsl:if&gt;
+			&lt;/li&gt;
+		&lt;/xsl:for-each&gt;
+	&lt;/ul&gt;
+&lt;/xsl:template&gt;</code></pre>
+	</content>
+</page>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/paternity-test/</path>
+	</meta>
+	<content type="main">
+		<h1>paternity-test</h1>
+		<p><code>paternity-test</code> decides how each link in the navigation is marked up. There are three possible states for each link in the navigation:</p>
+		<ol>
+			<li>The current node being parsed is also the current page</li>
+			<li>The current node being parsed is a <em>parent</em> of the current page</li>
+			<li>The current node has no relationship, or is a child of the current page (normal link)</li>
+		</ol>
+		<p>Both parent-child and current page status is indicated with the <code>emphasis</code> tag. This is used for two reasons:</p>
+		<ol>
+			<li>If the <jargon type="CSS"/> file is not loaded, this relationship is still clear</li>
+			<li>The <code>emphasis</code> tag is semantic - it indicates that the current node is more important than it's siblings, in some way.</li>
+		</ol>
+		<pre><code class="html">&lt;xsl:template match="link" name="paternity-test"&gt;
+	&lt;xsl:param name="url"/&gt;
+	&lt;xsl:choose&gt;
+		&lt;!-- When we are on the current page, because recursive links are a bad idea. No, really. --&gt;
+		&lt;xsl:when test="@url = $url"&gt;
+			&lt;em title="You are here"&gt;&lt;xsl:value-of select="@text"/&gt;&lt;/em&gt;
+		&lt;/xsl:when&gt;
+		&lt;!-- When the current page is a child of the current node --&gt;
+		&lt;xsl:when test="descendant::link[@url = $url]"&gt;
+			&lt;em&gt;&lt;xsl:apply-templates select="."/&gt;&lt;/em&gt;
+		&lt;/xsl:when&gt;
+		&lt;!-- Normal link --&gt;
+		&lt;xsl:otherwise&gt;
+			&lt;xsl:apply-templates select="."/&gt;
+		&lt;/xsl:otherwise&gt;
+	&lt;/xsl:choose&gt;
+&lt;/xsl:template&gt;</code></pre>
+	</content>
+</page>

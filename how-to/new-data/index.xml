@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description>How to add a new data structure to Takahē.</description>
+		<path>/how-to/new-data/</path>
+	</meta>
+	<content type="main">
+		<h1>Add a new data structure</h1>
+		<p><code>global.xml</code> contains both meta-data about the site, and navigation bars:</p>
+
+		<pre><code class="html">&lt;global&gt;
+	&lt;meta&gt;
+		&lt;site-title&gt;Takahē client-side XSLT framework documentation&lt;/site-title&gt;
+		...
+	&lt;/meta&gt;
+	&lt;nav type="main" title="Main navigation"&gt;
+		&lt;link url="/" text="Home"/&gt;
+		...
+	&lt;/nav&gt;
+	&lt;nav type="footer" title="Footer navigation" class="list-inline"&gt;
+		&lt;link url="/legal/" text="Terms of use"/&gt;
+		...
+	&lt;/nav&gt;
+&lt;/global&gt;</code></pre>
+
+		<p>New data nodes can be added as children of the <code>global</code> root node, which can represent anything. For example:</p>
+
+		<pre><code class="html">&lt;global&gt;
+	&lt;meta&gt;...&lt;/meta&gt;
+	&lt;nav type="main" title="Main navigation"&gt;...&lt;/nav&gt;
+	&lt;nav type="footer" title="Footer navigation" class="list-inline"&gt;...&lt;/nav&gt;
+	&lt;biographies&gt;
+		&lt;biog id="F48SD487EF4Y85A"&gt;
+			&lt;name&gt;
+				&lt;forename&gt;Ross&lt;/forename&gt;
+				&lt;surname&gt;Angus&lt;/surname&gt;
+			&lt;/name&gt;
+			&lt;title&gt;Mr&lt;/title&gt;
+			&lt;location&gt;Edinburgh&lt;/location&gt;
+			&lt;image-path&gt;/img/people-ross-angus.jpg&lt;/image-path&gt;
+		&lt;/biog&gt;
+	&lt;/biographies&gt;
+&lt;/global&gt;</code></pre>
+
+		<p>Note that if this data is in global.xml, it would be available to all pages on your site. Depending upon how large this data became, you might want to split it to a different <jargon type="XML"/> file.</p>
+
+		<h2><jargon type="XSLT"/></h2>
+
+		<pre><code class="html">&lt;xsl:template match="biog"&gt;
+	...
+&lt;/xsl:template&gt;</code></pre>
+
+		<p>If you had more than one treatment of <code>biog</code> nodes, you could add a <code>mode</code> attribute, to make each treatment specific to different markup.</p>
+
+	</content>
+</page>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/crumb-trail/</path>
+	</meta>
+	<content type="main">
+		<h1>crumb-trail</h1>
+		<p>The <code>crumb-trail</code> template is little more than a wrapper for the <code>crumb-list-item</code> template, apart from in one aspect: In classic site architecture, the home page is represented as being at the top of the site map; all pages are in effect, descendants of the home page. In practice, the home page is often represented as a sibling of the top-level navigation.</p>
+		<p>This is because a navigation bar frequently features a <em>home</em> link alongside the rest of the top level navigation.</p>
+		<p>The first <code>if</code> test below allows us to have this sibling navigation structure <em>and</em> have the <code>home</code> link appear first in the crumb trail. It's unfortunate that the string <code>home</code> is hard-coded into the template. This means that a different logic (for example, checking for a specific <jargon type="URI"/>) would be better in multi-language sites.</p>
+		<p>You may want your navigation file to be "pure", in which case, this <code>if</code> statement can be removed.</p>
+		<p>The crumb trail will be written out for every navigation item which can be found in the navigation. Note that there can be more than one top-level navigation bars: the footer links are also considered top level links, but are in the footer navigation <jargon type="XML"/>, rather than the main navigation <jargon type="XML"/>.</p>
+		<p>The markup is output as an ordered list, so that if <jargon type="CSS"/> does not render, then the list makes semantic sense.</p>
+		<pre><code class="html">&lt;xsl:template match="nav" mode="crumb-trail"&gt;
+	&lt;xsl:param name="url"/&gt;
+	&lt;xsl:if test=".//link/@url = $url"&gt;
+		&lt;nav aria-label="Crumbtrail" itemscope="" itemtype="https://schema.org/breadcrumb"&gt;
+			&lt;ol itemscope="" itemtype="https://schema.org/BreadcrumbList"&gt;
+				&lt;xsl:if test="$url != //link[@text = 'Home']/@url"&gt;
+					&lt;li&gt;&lt;xsl:apply-templates select="//link[@text = 'Home']"/&gt;&lt;/li&gt;
+				&lt;/xsl:if&gt;
+
+				&lt;xsl:apply-templates mode="crumb-list-item"&gt;
+					&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="$url"/&gt;&lt;/xsl:with-param&gt;
+				&lt;/xsl:apply-templates&gt;
+			&lt;/ol&gt;
+		&lt;/nav&gt;
+	&lt;/xsl:if&gt;
+&lt;/xsl:template&gt;</code></pre>
+	</content>
+</page>

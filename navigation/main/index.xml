@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<path>/navigation/main/</path>
+	</meta>
+	<content type="main">
+		<h1>Main navigation</h1>
+		<p>By default, the main navigation generates nested, unordered links as deep as is required (there's no limit imposed by <a href="/xslt-structure/templates/top-nav/">the top-nav template</a>). Note that the top and second level of the navigation have some extra markup, to create basic mega menus.</p>
+
+		<h2>Future work</h2>
+		<ul>
+			<li>Add content items to the mega menus</li>
+		</ul>
+
+	</content>
+</page>

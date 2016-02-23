@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/content/</path>
+	</meta>
+	<content type="main">
+		<h1>Content</h1>
+		<p>This is an example of an <a href="http://www.xmlplease.com/xsltidentity">Identity template</a>. It appears to do very little - taking a particular set of nodes, and just copying them. However, in doing this, it allows these nodes to be altered by later templates which share the <code>content</code> mode.</p>
+		<pre><code class="html">&lt;xsl:template match="@*|node()" mode="content"&gt;
+	&lt;xsl:copy&gt;
+		&lt;xsl:apply-templates select="@*|node()" mode="content"/&gt;
+	&lt;/xsl:copy&gt;
+&lt;/xsl:template&gt;</code></pre>
+		<p>Identity templates are recursive, and will automatically call themselves, when required. For example, When parsing the following:</p>
+		<pre><code class="html">&lt;p&gt;This sentence is &lt;em&gt;well-formed&lt;/em&gt;.&lt;/p&gt;</code></pre>
+		<p>... the template would be called once for the paragraph, and again for the <code>emphasis</code> tag inside it.</p>
+		<h2>Other templates using content</h2>
+		<p>The power of the identity template becomes clear, when you have markup such as this:</p>
+		<pre><code class="html">&lt;h1&gt;Amazing parkour cat!&lt;/h1&gt;
+&lt;p&gt;&lt;youtube id="Fa_V0y81oc4"/&gt;&lt;/p&gt;</code></pre>
+		<p>The above <code>youtube</code> tag will be interpreted by the following template:</p>
+		<pre><code class="html">&lt;xsl:template match="youtube" mode="content"&gt;
+	&lt;iframe width="420" height="315" src="https://www.youtube.com/embed/{@id}" frameborder="0" allowfullscreen=""&gt;&lt;/iframe&gt;
+&lt;/xsl:template&gt;</code></pre>
+		<p>Because the above template has a <code>mode="content"</code> attribute, it will be included with the identity template, and will replace the <code>youtube</code> tag when the <jargon type="XSLT"/> is parsed.</p>
+	</content>
+</page>

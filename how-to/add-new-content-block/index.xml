@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description>This section of the site has a list of tutorials to extent Takahē.</description>
+		<path>/how-to/add-new-content-block/</path>
+	</meta>
+	<content type="main">
+		<h1>How to add a new content block</h1>
+		<p>Blocks of <jargon type="HTML"/> content in Takahē are stored in <code>content</code> tags, which look like this:</p>
+		<pre><code class="html">&lt;content <strong>type="main"</strong>&gt;
+	&lt;h1&gt;This is the content for the page&lt;/h1&gt;
+&lt;/content&gt;</code></pre>
+		<p>This <jargon type="XML"/> can be found in the <a href="/data-structure/page/">individual pages</a> of your site.</p>
+		<p>This content is pulled into the <a href="/xslt-structure/wireframes/">page wireframe</a> with <jargon type="XSLT"/> which looks like this:</p>
+		<pre><code class="html">&lt;xsl:apply-templates select="/page/content[@<strong>type = 'main'</strong>]/node()" mode="content"/&gt;</code></pre>
+		<p>You could create new (non-manditory) blocks of content in page level files. For example:</p>
+		<pre><code class="html">&lt;content <strong>type="call-to-action"</strong>&gt;
+	&lt;aside class="cta"&gt;Please contact us for more information&lt;/aside&gt;
+&lt;/content&gt;</code></pre>
+		<p>These can be pulled into the page wireframe using the following <jargon type="XSLT"/>:</p>
+		<pre><code class="html">&lt;xsl:apply-templates select="/page/content[@<strong>type = 'call-to-action'</strong>]/node()" mode="content"/&gt;</code></pre>
+		<p>It might seem strange that the same <jargon type="XSLT"/> template (<a href="/xslt-structure/templates/content/"><code>content</code></a>) is being used for both the main content of the site, and the call-to-action content. All the <code>content</code> template does is ensure that any fragments of <jargon type="XML"/> inside the content will be parsed correctly.</p>
+		<p>If something more complicated was required in the right-hand column, for example a list of staff, then it might be better to <a href="/how-to/new-data/">build a bespoke template to handle the data</a>.</p>
+	</content>
+</page>

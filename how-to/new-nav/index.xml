@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description>How to add a new bar of navigation to Takahē.</description>
+		<path>/how-to/new-nav/</path>
+	</meta>
+	<content type="main">
+		<h1>Add a new navigation bar</h1>
+		<p>The main navigation in <code>global.xml</code> has a root node which looks like this:</p>
+		<pre><code class="html">&lt;nav <strong>type="main"</strong> title="Main navigation"&gt;
+	&lt;link url="/" text="Home"/&gt;
+	...
+&lt;/nav&gt;</code></pre>
+		<p>You can add as many <code>nav</code> nodes as you like, within <code>global.xml</code>. Each one can be parsed by it's own <jargon type="XSLT"/> template, as long as the <code>type</code> attribute is changed to a different value.</p>
+		<p>The <a href="/xslt-structure/wireframes/">page wireframe</a> calls the <jargon type="XSLT"/> as follows:</p>
+		<pre><code class="html">&lt;!-- Top navigation --&gt;
+&lt;xsl:apply-templates select="document('&amp;global-path;')/global/nav[@<strong>type = 'main'</strong>]" mode="top-nav"&gt;
+	&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="/page/meta/path"/&gt;&lt;/xsl:with-param&gt;
+&lt;/xsl:apply-templates&gt;</code></pre>
+		<p>Exactly the same <jargon type="XSLT"/> can be used to add markup to a completely different set of <jargon type="XML"/>, and even add a <code>class</code> onto it.</p>
+
+		<h2><jargon type="XML"/>:</h2>
+		<pre><code class="html">&lt;nav <strong>type="footer"</strong> title="Footer navigation" class="list-inline"&gt;
+	&lt;link url="/legal/" text="Terms of use"/&gt;
+	&lt;link url="http://www.realise.com/" text="Realise" target="_blank"/&gt;
+	&lt;link url="/faq/" text="Frequently asked questions"/&gt;
+&lt;/nav&gt;</code></pre>
+
+		<h2>Call to the <jargon type="XSLT"/>:</h2>
+		<pre><code class="html">&lt;!-- Footer navigation --&gt;
+&lt;xsl:apply-templates select="document('&amp;global-path;')/global/nav[@<strong>type = 'footer'</strong>]" mode="top-nav"&gt;
+	&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="/page/meta/path"/&gt;&lt;/xsl:with-param&gt;
+&lt;/xsl:apply-templates&gt;</code></pre>
+
+		<h2>Transforming the new data</h2>
+		<p>The new data can be transformed using an existing <jargon type="XSLT"/> template, or a new template can be written, to transform the data into different <jargon type="HTML"/>.</p>
+
+		<h3>Transforming the new data, using an existing <jargon type="XSLT"/> template</h3>
+		<p>If an existing <jargon type="XSLT"/> template is sufficient to transform your new data, it can be called using the previous <jargon type="XSLT"/> example on this page. The attribute <code>mode</code> selects the <jargon type="XSLT"/> template which will be used.</p>
+
+		<h3>Transforming the new data, using a <em>new</em> <jargon type="XSLT"/> template</h3>
+		<p>If a bespoke <jargon type="XSLT"/> template is required for the new navigation bar, this can be called using the <code>mode</code> attribute.</p>
+
+		<h4><jargon type="XML"/></h4>
+
+		<pre><code class="html">&lt;!-- Footer navigation --&gt;
+&lt;xsl:apply-templates select="document('&amp;global-path;')/global/nav[@type = 'footer']" <strong>mode="footer-nav"</strong>&gt;
+	&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="/page/meta/path"/&gt;&lt;/xsl:with-param&gt;
+&lt;/xsl:apply-templates&gt;</code></pre>
+
+		<h4><jargon type="XSLT"/></h4>
+
+		<pre><code class="html">&lt;xsl:template match="nav" <strong>mode="footer-nav"</strong>&gt;
+	...
+&lt;/xsl:template&gt;</code></pre>
+
+	</content>
+</page>

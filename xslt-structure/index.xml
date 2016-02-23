@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/</path>
+	</meta>
+	<content type="main">
+		<h1><jargon type="XSLT"/> structure</h1>
+		<h2>Templates</h2>
+		<p>In <jargon type="XSLT"/>, the word <em>templates</em> refers to code which works in a similar way to functions in another language.</p>
+		<p>In <jargon type="CMS"/>s, the word <em>template</em> refers to files which include general page layouts.</p>
+		<p>This is going to get confusing. For the purposes of this documentation, I'll use the term <a href="/xslt-structure/wireframes/">wireframe</a> to refer to general page layouts, and <em>template</em> to the <jargon type="XSLT"/> chunks of code.</p>
+	</content>
+</page>

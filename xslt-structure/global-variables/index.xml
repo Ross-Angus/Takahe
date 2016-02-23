@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/global-variables/</path>
+	</meta>
+	<content type="main">
+		<h1>Global variables</h1>
+		<p>There are a number of global variables used in <code>global-templates.xsl</code>.</p>
+		<h2>site-title</h2>
+		<p><code>$site-title</code> is the string taken from <code>/global/meta/site-title/</code> in <code>global.xml</code>.</p>
+	</content>
+</page>

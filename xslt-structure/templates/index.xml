@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/</path>
+	</meta>
+	<content type="main">
+		<h1>Templates</h1>
+		<p>There are a number of <jargon type="XSLT"/> templates used in the site. Please see the sub-navigation, for a description of each one.</p>
+	</content>
+</page>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/entities/</path>
+	</meta>
+	<content type="main">
+		<h1>Entities</h1>
+		<p>Before any <jargon type="XSLT"/> is parsed by the browser, the <jargon type="XSLT"/> is first parsed by an <jargon type="XML"/> parser. We can use the way this parser handles <jargon type="HTML"/> entities to use them a little like variables.</p>
+		<p>The path to the main site data file is used throughout <code>global-templates.xsl</code>, but might change, depending on the structure of the site. Because of this, the value of this path is established at the top of the <code>global-templates</code> <jargon type="XSLT"/> file like this:</p>
+		<pre><code class="html">&lt;!DOCTYPE xsl:stylesheet [
+	&lt;!ENTITY global-path '<strong>/data/global.xml</strong>'&gt;
+]&gt;</code></pre>
+		<p>This means that wherever the <jargon type="HTML"/> entity <code>&amp;global-path;</code> is used, the <jargon type="XSLT"/> will use the <code>/data/global.xml</code> string instead.</p>
+		<p>You can define other entities using this method, if required. <a href="http://www.xml.com/pub/a/2001/03/14/trxml10.html">More information about entities and <jargon type="XSLT"/></a>.</p>
+	</content>
+</page>

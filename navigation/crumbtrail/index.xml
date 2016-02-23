@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<path>/navigation/crumbtrail/</path>
+	</meta>
+	<content type="main">
+		<h1>Crumb trail</h1>
+		<p>The <a href="/xslt-structure/templates/crumb-trail/">crumb trail template</a> works like a vertical slice through the current navigation. Each node, from the current page, up to the home page, is represented.</p>
+		<p>Note that the home page is a sibling to all top-level pages. This approach isn't as pure as having all top-level pages as children of the home page. If a pure approach is required, changes will need to be made to the crumb trail template.</p>
+		<p>The crumbtrail is controlled by <a href="/xslt-structure/templates/crumb-trail/">the <code>crumb-trail</code> template</a>.</p>
+	</content>
+</page>

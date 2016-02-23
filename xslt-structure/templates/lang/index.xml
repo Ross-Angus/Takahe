@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/lang/</path>
+	</meta>
+	<content type="main">
+		<h1>lang</h1>
+		<p>The <code>lang</code> template adds a <code>lang</code> attribute to the <code>html</code> element. It first looks to the page file, and if no <code>lang</code> element is present, looks to <code>global.xml</code> to find one.</p>
+		<p>This means it's possible to declare your language both globally and locally.</p>
+		<pre><code class="html">&lt;xsl:template match="meta" mode="lang"&gt;
+	&lt;xsl:attribute name="lang"&gt;
+		&lt;xsl:choose&gt;
+			&lt;!-- Is there a language attribute in this page file? --&gt;
+			&lt;xsl:when test="normalize-space(language) != ''"&gt;
+				&lt;xsl:value-of select="normalize-space(language)"/&gt;
+			&lt;/xsl:when&gt;
+			&lt;!-- Pull the language from the global file --&gt;
+			&lt;xsl:otherwise&gt;
+				&lt;xsl:value-of select="normalize-space(document('&global-path;')/global/meta/language)"/&gt;
+			&lt;/xsl:otherwise&gt;
+		&lt;/xsl:choose&gt;
+	&lt;/xsl:attribute&gt;
+&lt;/xsl:template&gt;</code></pre>
+	</content>
+</page>

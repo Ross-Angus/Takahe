@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description>Wireframes in this XSLT framework are what would be called templates in any other CMS. They can be chosen in the page XML.</description>
+		<path>/xslt-structure/wireframes/</path>
+	</meta>
+	<content type="main">
+		<h1>Wireframes</h1>
+		<p>All page wireframes are stored in the <code>xslt</code> folder. Individual page <jargon type="XML"/> selects a particular wireframe to use, in the <code>?xml-stylesheet</code> declaration. This is done as follows:</p>
+		<pre><code class="html">&lt;?xml-stylesheet type="text/xsl" href="<strong>/xslt/page.xslt</strong>"?&gt;</code></pre>
+		<p>You can add as many wireframes as you like, and apply them to individual pages in this way.</p>
+	</content>
+</page>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/verb/</path>
+	</meta>
+	<content type="main">
+		<h1>Verb</h1>
+		<p>For debug purposes, it sometimes becomes necessary to output a particular chunk of <jargon type="XML"/> to the page. In order to do this, and for the <jargon type="XML"/> to be visible, the angle brackets need to be escaped. Luckily, <a href="http://logit.yudichev.net/2007/11/xslt-output-xml-escaped-copy-of-source.html">the hard work of writing this particular template</a> was done for me by <a href="https://plus.google.com/113129195251333884111">Alexey Yudichev</a>.</p>
+		<pre><code class="html">&lt;xsl:template match="*|@*" mode="verb"&gt;
+    &lt;xsl:variable name="node-type"&gt;
+        &lt;xsl:call-template name="node-type"/&gt;
+    &lt;/xsl:variable&gt;
+    &lt;xsl:choose&gt;
+        &lt;xsl:when test="$node-type='element'"&gt; &lt;!-- element --&gt;
+            &lt;xsl:text&gt;&lt;&lt;/xsl:text&gt;
+            &lt;xsl:value-of select="name()"/&gt;
+            &lt;xsl:apply-templates select="@*" mode="verb"/&gt;
+            &lt;xsl:text&gt;&gt;&lt;/xsl:text&gt;
+            &lt;xsl:apply-templates mode="verb"/&gt;
+            &lt;xsl:text&gt;&lt;/&lt;/xsl:text&gt;
+            &lt;xsl:value-of select="name()"/&gt;
+            &lt;xsl:text&gt;&gt;&lt;/xsl:text&gt;
+        &lt;/xsl:when&gt;
+        &lt;xsl:when test="$node-type='text'"&gt; &lt;!-- text --&gt;
+            &lt;xsl:value-of select="self::text()"/&gt;
+        &lt;/xsl:when&gt;
+        &lt;xsl:when test="$node-type='attribute'"&gt; &lt;!--any attribute--&gt;
+            &lt;xsl:text&gt; &lt;/xsl:text&gt;
+            &lt;xsl:value-of select="name()"/&gt;
+            &lt;xsl:text&gt;="&lt;/xsl:text&gt;
+            &lt;xsl:value-of select="."/&gt;
+            &lt;xsl:text&gt;"&lt;/xsl:text&gt;
+        &lt;/xsl:when&gt;
+    &lt;/xsl:choose&gt;
+&lt;/xsl:template&gt;
+
+&lt;xsl:template name="node-type"&gt;
+    &lt;xsl:param name="node" select="."/&gt;
+    &lt;xsl:apply-templates mode="nodetype" select="$node"/&gt;
+&lt;/xsl:template&gt;
+&lt;xsl:template mode="nodetype" match="*"&gt;element&lt;/xsl:template&gt;
+&lt;xsl:template mode="nodetype" match="@*"&gt;attribute&lt;/xsl:template&gt;
+&lt;xsl:template mode="nodetype" match="text()"&gt;text&lt;/xsl:template&gt;</code></pre>
+		<p>This template can be used to show the current node by including the following markup in your <jargon type="XSLT"/>:</p>
+		<pre><code class="html">&lt;pre&gt;&lt;code class="html"&gt;&lt;xsl:apply-templates mode="verb" select="."/&gt;&lt;/code&gt;&lt;/pre&gt;</code></pre>
+	</content>
+</page>

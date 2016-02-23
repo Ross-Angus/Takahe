@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description>Examples of the data contained at the page level of the XSLT framework.</description>
+		<path>/data-structure/page/</path>
+	</meta>
+	<content type="main">
+		<h1>Page level data</h1>
+		<h2>Content</h2>
+		<p>Takahē stores the content for individual pages in <jargon type="XML"/> files. These act in much the same way as <jargon type="HTML"/> pages would, in a static site: the folders these files are placed in, dictate the final <jargon type="URL"/> of the page they represent.</p>
+		<p>Each content <jargon type="XML"/> file included a content block, which is marked up as follows:</p>
+		<pre><code class="html">&lt;content type="main"&gt;
+	&lt;h1&gt;This is the content for the page&lt;/h1&gt;
+&lt;/content&gt;</code></pre>
+		<p><jargon type="HTML"/> can be added directly inside the <code>content</code> tag, but as it will be treated as <jargon type="XML"/>, all tags should be <a href="https://en.wikipedia.org/wiki/Well-formed_element">well-formed</a>.</p>
+		<h2>Meta data</h2>
+		<p>Much of the meta-data which is used in <code>global.xml</code> can be reused at the page level. This means that a site might be in one language, but an individual page could be set to a different language.</p>
+		<p>Meta elements, which can be set at the page level:</p>
+		<ul>
+			<li>Page title (if left empty, this string will be taken from the navigation in <code>global.xml</code>)</li>
+			<li>Description (recommended)</li>
+			<li>Page URL - string from the root of the site. It should match that used in <code>global.xml</code> (required).</li>
+			<li>Site language (in <jargon type="ISO"/> 639-1 form) (not required)</li>
+		</ul>
+
+	</content>
+</page>

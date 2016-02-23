@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/link/</path>
+	</meta>
+	<content type="main">
+		<h1>Global link template</h1>
+		<p>The global link template handles all links in the navigation, by default. It's never called directly (it's not got a <code>name</code> or <code>mode</code>), but will appear wherever there is an <code>apply-templates</code> for a link.</p>
+		<p>It can be expanded to include any attributes you would like to add to an individual <code>link</code> element in <code>global.xml</code></p>
+		<pre><code class="html">&lt;xsl:template match="link"&gt;
+	&lt;a&gt;
+		&lt;xsl:if test="normalize-space(@url) != ''"&gt;
+			&lt;xsl:attribute name="itemprop"&gt;url&lt;/xsl:attribute&gt;
+			&lt;xsl:attribute name="href"&gt;&lt;xsl:value-of select="@url"/&gt;&lt;/xsl:attribute&gt;
+		&lt;/xsl:if&gt;
+		&lt;xsl:if test="normalize-space(@target) != ''"&gt;
+			&lt;xsl:attribute name="target"&gt;&lt;xsl:value-of select="@target"/&gt;&lt;/xsl:attribute&gt;
+		&lt;/xsl:if&gt;
+		&lt;xsl:if test="normalize-space(@onclick) != ''"&gt;
+			&lt;xsl:attribute name="onclick"&gt;&lt;xsl:value-of select="@onclick"/&gt;&lt;/xsl:attribute&gt;
+		&lt;/xsl:if&gt;
+		&lt;xsl:if test="normalize-space(@class) != ''"&gt;
+			&lt;xsl:attribute name="class"&gt;&lt;xsl:value-of select="@class"/&gt;&lt;/xsl:attribute&gt;
+		&lt;/xsl:if&gt;
+		&lt;xsl:if test="normalize-space(@id) != ''"&gt;
+			&lt;xsl:attribute name="id"&gt;&lt;xsl:value-of select="@id"/&gt;&lt;/xsl:attribute&gt;
+		&lt;/xsl:if&gt;
+		&lt;xsl:if test="normalize-space(@text) != ''"&gt;
+			&lt;span itemprop="name"&gt;&lt;xsl:value-of select="@text"/&gt;&lt;/span&gt;
+		&lt;/xsl:if&gt;
+	&lt;/a&gt;
+&lt;/xsl:template&gt;</code></pre>
+		<p>For example, let's say you wanted to add the following attribute to the navigation elements:</p>
+		<pre><code class="html">&lt;link url="/example/" text="Example page" <strong>rel="image"</strong>/&gt;</code></pre>
+		<p>... you could do so, by adding another <code>if</code> statement before the final statement which deals with <code>@text</code>, like this:</p>
+		<pre><code class="html">&lt;xsl:template match="link"&gt;
+		...
+		<strong>&lt;xsl:if test="normalize-space(@rel) != ''"&gt;
+			&lt;xsl:attribute name="rel"&gt;&lt;xsl:value-of select="@rel"/&gt;&lt;/xsl:attribute&gt;
+		&lt;/xsl:if&gt;</strong>
+		&lt;xsl:if test="normalize-space(@text) != ''"&gt;
+			&lt;xsl:value-of select="@text"/&gt;
+		&lt;/xsl:if&gt;
+	&lt;/a&gt;
+&lt;/xsl:template&gt;</code></pre>
+		<p>There's no need to have a direct equivalence between the name of the attribute on the <code>link</code> element, and the name of the attribute which is finally added to the anchor tag. If required, these could be different.</p>
+	</content>
+</page>

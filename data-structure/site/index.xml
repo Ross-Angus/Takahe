@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description>Site-wide data found in global.xml</description>
+		<path>/data-structure/site/</path>
+	</meta>
+	<content type="main">
+		<h1>Site</h1>
+		<p>All site-wide data is found in <code>global.xml</code>. This takes two forms:</p>
+		<h2>Meta tags</h2>
+		<p>The meta-tags in <code>global.xml</code> are added to the page by <a href="/xslt-structure/templates/meta/">the meta template</a>.</p>
+		<p>The <jargon type="XSLT"/> attempts to find meta tag data in the following order:</p>
+		<ol>
+			<li>From the page level file</li>
+			<li>From the section level file</li>
+			<li>From the site level file</li>
+		</ol>
+		<p>What this means is that one particular piece of data - for example the description meta tag - could be defined in three different places. The <jargon type="XSLT"/> looks for the most relevant version of this information possible, and falls back to the alternatives.</p>
+
+		<h2>Navigation</h2>
+		<p>More than one <code>nav</code> element can be present as a child of the root node. <a href="/xslt-structure/templates/">The navigation templates</a> have been built to handle multiple bars of navigation.</p>
+	</content>
+</page>

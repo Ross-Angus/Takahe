@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description></description>
+		<path>/xslt-structure/templates/crumb-trail/crumb-list-item/</path>
+	</meta>
+	<content type="main">
+		<h1>crumb-list-item</h1>
+		<p>The <code>crumb-list-item</code> template handles a single list item or level of the navigation hierarchy. It's called recursively.</p>
+		<p>The <code>choose</code> statement works out if the current node being parsed is either an <em>ancestor</em> of the current page, or the current page itself (any nodes which do not confirm to either of these two states are ignored).</p>
+		<p>If the node in question is an ancestor, then it's children are passed recursively into the function again, and we keep drilling down, until we reach the current page.</p>
+		<pre><code class="html">&lt;xsl:template match="link" mode="crumb-list-item"&gt;
+	&lt;xsl:param name="url"/&gt;
+	&lt;xsl:choose&gt;
+
+		&lt;!-- Normal link: appears above the current page in the navigation --&gt;
+		&lt;xsl:when test="descendant::link[@url = $url]"&gt;
+			&lt;li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"&gt;
+				&lt;xsl:apply-templates select="."/&gt;
+			&lt;/li&gt;
+
+			&lt;!-- Call next level of nav. It selects &lt;link/&gt; to exclude tags from the crumbtrail. --&gt;
+			&lt;xsl:apply-templates mode="crumb-list-item" select="link"&gt;
+				&lt;xsl:with-param name="url"&gt;&lt;xsl:value-of select="$url"/&gt;&lt;/xsl:with-param&gt;
+			&lt;/xsl:apply-templates&gt;
+
+		&lt;/xsl:when&gt;
+
+		&lt;!-- Final node in the crumbtrail: the current page --&gt;
+		&lt;xsl:when test="@url = $url"&gt;
+			&lt;li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"&gt;
+				&lt;em title="You are here" itemprop="name"&gt;
+					&lt;xsl:value-of select="@text"/&gt;
+				&lt;/em&gt;
+			&lt;/li&gt;
+		&lt;/xsl:when&gt;
+
+	&lt;/xsl:choose&gt;
+
+&lt;/xsl:template&gt;</code></pre>
+	</content>
+</page>
