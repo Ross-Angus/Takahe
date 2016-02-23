@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
 <page>
 	<meta>
-		<description>This is the home page of a client-side XSLT framework documentation.</description>
+		<description>About Takahē: it's basically a poor-man's web components</description>
 		<path>/about/</path>
 	</meta>
 	<content type="main">
