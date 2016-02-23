@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<global>
+	<meta>
+		<site-title>Takahē client-side XSLT framework documentation</site-title>
+		<!-- This is the default description. It is only used if an individual file or section is missing a description. -->
+		<description>Takahē is a set of files which allows a web developer to put together a client-side XSLT site with all navigation in an external XML file. This site is both documentation of how to use Takahē, and a demonstration of what it can do.</description>
+		<base-url>http://labs.realise.com/rossa/xslt</base-url>
+		<!-- To find this number, use findmyfacebookid.com -->
+		<facebook-id>115083445236278</facebook-id>
+		<!-- Please see http://ogp.me for a list of types -->
+		<open-graph-type>website</open-graph-type>
+		<!-- At least 200px X 200px. Ideally 1,200px X 630px. Used by Facebook, Twitter and (sigh) Google+. -->
+		<site-image>/img/logo-takahe-large.png</site-image>
+		<language>en-gb</language>
+		<charset>utf-8</charset>
+		<viewport>content="width=device-width, initial-scale=1.0</viewport>
+		<X-UA-Compatible>IE=Edge</X-UA-Compatible>
+		<HandheldFriendly>true</HandheldFriendly>
+	</meta>
+	<nav type="main" title="Main navigation">
+		<link url="/" text="Home">
+			<tag>Introduction</tag>
+		</link>
+		<link url="/about/" text="About">
+			<tag>Introduction</tag>
+			<tag>Web components</tag>
+			<tag>Glen Maddern</tag>
+		</link>
+		<link url="/data-structure/" text="Data structure">
+			<tag>Navigation</tag>
+			<tag>Meta-tags</tag>
+			<tag>Data</tag>
+			<link url="/data-structure/page/" text="Page level">
+				<tag>Meta-tags</tag>
+				<tag>Content</tag>
+			</link>
+			<link url="/data-structure/section/" text="Section level"/>
+			<link url="/data-structure/site/" text="Site level">
+				<tag>Meta-tags</tag>
+				<tag>Navigation</tag>
+				<tag>Site title</tag>
+				<tag>Description</tag>
+				<tag>Base URL</tag>
+				<tag>Facebook ID</tag>
+				<tag>Open Graph type</tag>
+				<tag>Site image</tag>
+				<tag>Language</tag>
+				<tag>Character set</tag>
+				<tag>Viewport</tag>
+				<tag>IE compatibility</tag>
+				<tag>Hand held friendly</tag>
+			</link>
+		</link>
+		<link url="/xslt-structure/" text="XSLT structure">
+			<tag>Templates</tag>
+			<tag>Wireframes</tag>
+			<link url="/xslt-structure/wireframes/" text="Wireframes">
+				<tag>Wireframes</tag>
+			</link>
+			<link url="/xslt-structure/entities/" text="Entities">
+				<tag>Entities</tag>
+				<tag>Global variables</tag>
+				<tag>Ampersand</tag>
+			</link>
+			<link url="/xslt-structure/global-variables/" text="Global variables">
+				<tag>Global variables</tag>
+			</link>
+			<link url="/xslt-structure/templates/" text="Templates">
+				<tag>Templates</tag>
+				<link url="/xslt-structure/templates/top-nav/" text="top-nav">
+					<tag>Navigation</tag>
+					<link url="/xslt-structure/templates/top-nav/next-nav/" text="next-nav">
+						<tag>Navigation</tag>
+					</link>
+				</link>
+				<link url="/xslt-structure/templates/paternity-test/" text="paternity-test">
+					<tag>Navigation</tag>
+				</link>
+				<link url="/xslt-structure/templates/sub-nav/" text="sub-nav">
+					<tag>Navigation</tag>
+					<tag>sub-nav</tag>
+				</link>
+				<link url="/xslt-structure/templates/crumb-trail/" text="crumb-trail">
+					<tag>Navigation</tag>
+					<tag>crumbtrail</tag>
+					<link url="/xslt-structure/templates/crumb-trail/crumb-list-item/" text="crumb-list-item">
+						<tag>Navigation</tag>
+						<tag>crumbtrail</tag>
+					</link>
+				</link>
+				<link url="/xslt-structure/templates/link/" text="Global link template">
+					<tag>Navigation</tag>
+				</link>
+				<link url="/xslt-structure/templates/lang/" text="lang">
+					<tag>Language</tag>
+				</link>
+				<link url="/xslt-structure/templates/meta/" text="meta"/>
+				<link url="/xslt-structure/templates/content/" text="content">
+					<tag>Web components</tag>
+				</link>
+				<link url="/xslt-structure/templates/jargon/" text="jargon">
+					<tag>Web components</tag>
+				</link>
+				<link url="/xslt-structure/templates/verb/" text="verb">
+					<tag>Legal</tag>
+				</link>
+			</link>
+		</link>
+		<link url="/navigation/" text="Navigation">
+			<tag>Navigation</tag>
+			<link url="/navigation/main/" text="Main navigation">
+				<tag>Navigation</tag>
+				<tag>top-nav</tag>
+				<tag>next-nav</tag>
+			</link>
+			<link url="/navigation/sub/" text="Sub navigation">
+				<tag>Navigation</tag>
+				<tag>sub-nav</tag>
+			</link>
+			<link url="/navigation/mega/" text="Mega menus">
+				<tag>Navigation</tag>
+				<tag>top-nav</tag>
+				<tag>next-nav</tag>
+			</link>
+			<link url="/navigation/crumbtrail/" text="Crumbtrail">
+				<tag>Navigation</tag>
+				<tag>crumbtrail</tag>
+			</link>
+		</link>
+		<link url="/how-to/" text="How to...">
+			<tag>How to</tag>
+			<tag>Help</tag>
+			<link url="/how-to/add-new-content-block/" text="Add a new content block">
+				<tag>How to</tag>
+				<tag>Help</tag>
+				<tag>Content</tag>
+			</link>
+			<link url="/how-to/new-nav/" text="Add a new navigation bar">
+				<tag>How to</tag>
+				<tag>Help</tag>
+				<tag>Navigation</tag>
+			</link>
+			<link url="/how-to/new-data/" text="Add a new data structure">
+				<tag>How to</tag>
+				<tag>Help</tag>
+				<tag>Data</tag>
+			</link>
+		</link>
+	</nav>
+	<nav type="footer" title="Footer navigation" class="list-inline">
+		<link url="/legal/" text="Terms of use">
+			<tag>Legal</tag>
+			<tag>Law</tag>
+			<tag>Terms</tag>
+		</link>
+		<link url="http://www.realise.com/" text="Realise" target="_blank"/>
+		<link url="/faq/" text="Frequently asked questions">
+			<tag>Frequently asked questions</tag>
+			<tag>Introduction</tag>
+			<tag>Help</tag>
+		</link>
+	</nav>
+</global>
