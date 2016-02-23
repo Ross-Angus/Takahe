@@ -1,0 +1,494 @@
+/* None of these styles are required for Takahē to work. Please feel free to replace all of this with your own CSS.
+   Based on html5doctor.com Reset Stylesheet v1.6.1 */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background: #eee;
+    color: #222;
+    line-height:1.2;
+    margin: 0 0 4em;
+    padding: 10px;
+}
+body, input, select {
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+textarea, code, pre {
+    font-family: "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono", monospace;
+    font-size: .9em;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+
+blockquote, q {quotes:none;}
+
+blockquote:before, q:before {
+    content:'“';
+}
+blockquote:after, q:after {
+    content:'”';
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+ins {
+    background:#fcf;
+    border:solid 1px #f9f;
+    color:#000;
+    padding:.2em .4em;
+    text-decoration:none;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted #333;
+    cursor:help;
+    text-decoration: none;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+input, select, button {vertical-align:middle;}
+
+/* This might be useful, if I ever float anything. */
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+.clearfix:after {clear: both;}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* CSS shape of the Takahē logo. A poor-man's SVG. */
+.logo-takahe {
+    background: radial-gradient(circle,
+        #111 0,
+        #111 .3em,
+        #955904 .3em,
+        #955904 .5em,
+        #12389b .5em) -.1em -.5em;
+    border-radius: 2em 2em 2em .2em;
+    box-sizing: border-box;
+    height: 4em;
+    position: relative;
+    width: 4em;
+}
+    .logo-takahe:before, .logo-takahe:after {
+        content: "";
+        position: absolute;
+    }
+    /* Top half of the beak */
+    .logo-takahe:after {
+        border-top: solid 1.5em #cc1c39;
+        border-bottom: solid .1em transparent;
+        border-left: solid 1em transparent;
+        border-right: solid .1em #cc1c39;
+        border-radius: 0 2em 0 0;
+        height: .5em;
+        left: 2em;
+        width: 3em;
+    }
+    /* Bottom half of the beak */
+    .logo-takahe:before {
+        border-top: solid 2.2em #df3a55;
+        border-right: solid 3em transparent;
+        bottom: .4em;
+        left: 3em;
+    }
+
+/* Main navigation, top */
+nav[aria-label="Main navigation"] {
+    border-bottom: solid 1px #ccc;
+    line-height: 2;
+    margin: 0 -10px .5em;
+    padding: 0 0 0 10px;
+    position: relative;
+}
+    nav[aria-label="Main navigation"] ul {
+        margin: 0;
+    }
+        nav[aria-label="Main navigation"] li {
+            display: inline-block;
+            margin: 0 -1px -1px 0;
+        }
+            /* Links are tabs. Deal. */
+            nav[aria-label="Main navigation"] a, nav[aria-label="Main navigation"] em {
+                background: #fff;
+                border: solid 1px #ccc;
+                color: #444;
+                display: block;
+                font-style: normal;
+                padding: 0 .6em;
+                text-decoration: none;
+            }
+            /* You are here */
+            nav[aria-label="Main navigation"] em,
+            nav[aria-label="Main navigation"] li:hover a {
+                background: #eee;
+                color: #000;
+            }
+            nav[aria-label="Main navigation"] > ul > li > em,
+            nav[aria-label="Main navigation"] > ul > li:hover > a {
+                border-bottom: 1px solid #eee;
+            }
+                /* One of the children of this particular link is the
+                current page. */
+                nav[aria-label="Main navigation"] em a {
+                    background: #eee;
+                    border: none;
+                    color: #000;
+                    padding: 0;
+                }
+
+            /* Second level navigation */
+            nav[aria-label="Main navigation"] .mega-menu {
+                background: #eee;
+                border: solid 1px #ccc;
+                border-top: none;
+                left: 10px;
+                margin: 1px 0 0;
+                /* Rather than display: none, I'm using opacity, so I
+                can use CSS animations. */
+                opacity: 0;
+                padding: 1em 0;
+                position: absolute;
+                right: 10px;
+                top: 100%;
+                -webkit-transition: all 200ms;
+                   -moz-transition: all 200ms;
+                     -o-transition: all 200ms;
+                        transition: all 200ms;
+                z-index: -1;
+            }
+            nav[aria-label="Main navigation"] li:hover > ul {
+                opacity: 1;
+                z-index: 1;
+            }
+                .mega-menu ul {
+                    display: none;
+                }
+                .mega-menu li:hover > ul,
+                .mega-menu ul ul,
+                nav[aria-label="Main navigation"] .mega-menu li {
+                    display: block;
+                    margin: 0;
+                }
+                    nav[aria-label="Main navigation"] .mega-menu > li {
+                        float: left;
+                        margin: 0;
+                    }
+                        nav[aria-label="Main navigation"] .mega-menu a,
+                        nav[aria-label="Main navigation"] .mega-menu em {
+                            border: none;
+                        }
+                        .mega-menu a:hover,
+                        .mega-menu a:focus,
+                        nav[aria-label="Main navigation"] .mega-menu em {
+                            text-decoration: underline;
+                        }
+                            nav[aria-label="Main navigation"] .mega-menu ul ul a,
+                            nav[aria-label="Main navigation"] .mega-menu ul ul em {
+                                padding-left: 1.5em;
+                            }
+
+/* Crumbtrail */
+[aria-label="Crumbtrail"] li {
+    display: inline-block;
+    font-size: .9em;
+    margin: 0 .8em 0 0;
+}
+[aria-label="Crumbtrail"] li:last-child {
+    margin: 0;
+}
+    [aria-label="Crumbtrail"] a, [aria-label="Crumbtrail"] em,
+    [aria-label="Tags"] label, [aria-label="Tags"] a {
+        background: #fff;
+        border-radius: .3em;
+        color: #666;
+        display: block;
+        font-style: normal;
+        padding: 0 .4em;
+        position: relative;
+        text-decoration: none;
+    }
+    [aria-label="Tags"] label, [aria-label="Tags"] a {
+        margin: 0 .2em .2em 0;
+    }
+    [aria-label="Tags"] a {
+        background: #eee;
+    }
+    [aria-label="Tags"] a:hover {
+        color: #000;
+    }
+        [aria-label="Crumbtrail"] a:before {
+            border: solid .5em transparent;
+            border-left: solid .7em #fff;
+            border-right: none;
+            content: "";
+            left: 100%;
+            position: absolute;
+            top: .2em;
+        }
+
+    [aria-label="Crumbtrail"] em {
+        color: #333;
+    }
+
+/* This ain't no CSS framework! */
+aside {
+    background: #eee;
+    opacity: .5;
+    padding: 0 0 0 1em;
+    position: absolute;
+    right: 0;
+    top: 10em;
+    -webkit-transition: all 300ms;
+       -moz-transition: all 300ms;
+         -o-transition: all 300ms;
+            transition: all 300ms;
+    width: 190px;
+}
+aside:hover {
+    opacity: 1;
+}
+
+/* Sub-navigation, left */
+[aria-label="Sub-navigation"] {
+    margin: 0 0 1em;
+}
+    [aria-label="Sub-navigation"] ul {
+        margin: 0;
+    }
+        [aria-label="Sub-navigation"] li {
+            margin: 0;
+        }
+            [aria-label="Sub-navigation"] li li {
+                margin: 0 0 0 .5em;
+            }
+            [aria-label="Sub-navigation"] a, [aria-label="Sub-navigation"] em {
+                background: #fff;
+                border: solid 1px #ccc;
+                color: #444;
+                display: block;
+                margin: 0 0 -1px;
+                padding: 0 .6em;
+                text-decoration: none;
+            }
+            /* You are here */
+            [aria-label="Sub-navigation"] em {
+                background: #eee;
+                color: #000;
+                font-style: normal;
+            }
+                [aria-label="Sub-navigation"] em a {
+                    background: none;
+                    border: none;
+                    padding: 0;
+                }
+
+h1, .h1 {font-size: 2em;}
+h2, .h2 {font-size: 1.8em;}
+h3, .h3 {font-size: 1.6em;}
+h4, .h4 {font-size: 1.4em;}
+h5, .h5 {font-size: 1.2em;}
+h6, .h6 {font-size: 1em;}
+p, ul, ol, dl, pre {
+    margin: 0 0 1em;
+}
+nav ul, nav ol, map ol, map ul,
+.list-inline,
+.list-inline ul,
+.list-inline ol {
+    list-style:none;
+}
+    .list-inline li {
+        display: inline-block;
+        margin: 0 .5em 0 0;
+    }
+        .list-inline em {
+            font-style: normal;
+        }
+
+nav li {margin: 0;}
+li {margin-left: 2em;}
+pre {
+    background: #23241f;
+    color: #fff;
+    padding: 10px;
+}
+iframe, img {max-width: 100%;}
+/* All the centre content is inside this */
+main {
+    margin: 0 0 2em;
+}
+    /* This is so that script blocks can take up the full width of the page, without scrolling.
+    It assumes that every element which is an immediate child of <main/> is block level already. */
+    main > *, footer {
+        max-width: 780px;
+    }
+    footer {
+        bottom: 0;
+        height: 4em;
+        left: 0;
+        padding: 10px;
+        position: absolute;
+    }
+    main > pre {
+        max-width: none;
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+/* Generic show/hide CSS magic */
+.toggle {
+    display: none;
+}
+.details {
+    -webkit-transition: all 500ms;
+       -moz-transition: all 500ms;
+         -o-transition: all 500ms;
+            transition: all 500ms;
+}
+
+sup, sub {
+    font-size: .8em;
+    position: relative;
+}
+/* Superscript is used as a sort of tooltip / note thing.
+These styles are reused for the tagging system. */
+sup {top: -.4em;}
+[aria-label="Tags"] li {
+    display: inline-block;
+    margin: 0;
+    position: relative;
+}
+    sup label {cursor: help;}
+    [aria-label="Tags"] label {cursor: pointer;}
+
+    sup .details,
+    [aria-label="Tags"] .details {
+        background: #fff;
+        bottom: 2em;
+        -webkit-box-shadow: 5px 5px 10px 0 rgba(0,0,0,.5);
+           -moz-box-shadow: 5px 5px 10px 0 rgba(0,0,0,.5);
+                box-shadow: 5px 5px 10px 0 rgba(0,0,0,.5);
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        -webkit-transition: all 500ms;
+           -moz-transition: all 500ms;
+             -o-transition: all 500ms;
+                transition: all 500ms;
+        width: 0;
+    }
+    sup .toggle:checked + .details,
+    [aria-label="Tags"] .toggle:checked + .details {
+        opacity: 1;
+        overflow: visible;
+        padding: .2em .5em;
+        width: 20em;
+    }
+    sup .details {
+        left: 0;
+    }
+    [aria-label="Tags"] .details {
+        right: 0;
+    }
+    /* Because the tags are in "pills", the tooltip needs to be further away */
+    [aria-label="Tags"] .details {
+        bottom: 2.5em;
+    }
+        /* The little speech mark, at the bottom of the bubble */
+        sup span:before, [aria-label="Tags"] section:before {
+            border: solid 1em transparent;
+            border-top: none;
+            top: 100%;
+            content: "";
+            position: absolute;
+        }
+        /* The speech mark points to the left, when it's a <note/> ... */
+        sup span:before {
+            border-left: solid 1em #fff;
+            border-right: none;
+            left: 1em;
+        }
+        /* ... where as it points to the right, when it's a tag. */
+        [aria-label="Tags"] section:before {
+            border-left: none;
+            border-right: solid 1em #fff;
+            right: 1em;
+        }
+
+sub {bottom: .4em;}
+
+/* FAQs */
+.faq .details, .faq .toggle:checked + .details {
+    -webkit-transition: all 500ms;
+       -moz-transition: all 500ms;
+         -o-transition: all 500ms;
+            transition: all 500ms;
+}
+.faq .details {
+    letter-spacing: -1em;
+    opacity: 0;
+    z-index: -1;
+}
+.faq .toggle:checked + .details {
+    letter-spacing: 0;
+    opacity: 1;
+    z-index: 1;
+}
+
+@media all and (max-width: 1000px) {
+
+    aside {
+        opacity: 1;
+        padding: 0;
+        position: static;
+        width: auto;
+    }
+
+}
