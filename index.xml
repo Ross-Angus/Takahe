@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<title>Welcome to the home page of this client-side XSLT framework documentation!</title>
+		<!-- If this XML node is missing, this description will come from the global.xml file. If this node is present, but empty, then no meta-tag will be written to the page. -->
+		<description>This is the home page of a client-side XSLT framework documentation.</description>
+		<path>/</path>
+		<!-- Language can be set at the page level, if required. This element can be omitted. -->
+		<language>en</language>
+	</meta>
+	<content type="main">
+		<h1>Takahē client-side <jargon type="XSLT"/> Framework documentation</h1>
+		<h2>What is this?</h2>
+		<p>Takahē is a set of files which allows a web developer to put together a client-side <jargon type="XSLT"/> site with all navigation in an external <jargon type="XML"/> file. This site is both documentation of how to use Takahē, and a demonstration of what it can do.</p>
+		<p>Client-side <jargon type="XSLT"/> is a little-used, <a href="/faq/#what-browsers-does-this-work-on">but well supported</a>, language which allows the content of a web page to be separated almost completely from the markup. It does not require JavaScript to work<note>The only JavaScript used on this site is to make the syntax highlighting in the code blocks work. It's done using the excellent <a href="https://highlightjs.org/">highlight.js</a>.<br/><br/>Even this tooltip is done without JavaScript.</note>.</p>
+		<p>If you view the source of this page, you'll see an <jargon type="XML"/> file, which links off to <jargon type="XSLT"/> files. The <jargon type="CSS"/>, JavaScript, navigation and surrounding template markup are all linked from these <jargon type="XSLT"/>s.</p>
+	</content>
+</page>
