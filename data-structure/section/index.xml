@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<?xml-stylesheet type="text/xsl" href="/rossa/takahe/xslt/page.xslt"?>
 <page>
 	<meta>
 		<title></title>
 		<description></description>
-		<path>/data-structure/section/</path>
+		<path>/rossa/takahe/data-structure/section/</path>
 	</meta>
 	<content type="main">
 		<h1>Section</h1>
-		<p>This does not exist yet.</p>
+		<p>Sections (as in top-level sections, not the <code>section</code> element in <jargon type="HTML"/>5) are not currently understood by Takahē. For some sites, it might be beneficial to have chunks of section data grouped together, and applied to child pages.</p>
 	</content>
 </page>
