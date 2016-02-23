@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xslt/page.xslt"?>
+<page>
+	<meta>
+		<description>This is the home page of a client-side XSLT framework documentation.</description>
+		<path>/about/</path>
+	</meta>
+	<content type="main">
+		<h1>About</h1>
+		<p>At a team meeting in 2015, we watched this video:</p>
+		<p><youtube id="i7mrZ_JsA8A"/></p>
+		<p>Throughout the video, I was reminded of something I'd filed away in 2003. A method which wasn't widely supported then, but would be now: client side <jargon type="XSLT"/>. It certainly doesn't do everything which Web Components does, but it allows us to use code such as this:</p>
+		<pre><code class="html">&lt;p&gt;&lt;youtube id="i7mrZ_JsA8A"/&gt;&lt;/p&gt;</code></pre>
+		<p>... and replace it client-side with more complicated <jargon type="HTML"/>. But without any JavaScript.</p>
+		<p>To my surprise, client-side <jargon type="XSLT"/> wasn't just being ignored, there wasn't even a build-ready framework for developers to start from. So I wrote one.</p>
+	</content>
+</page>
