@@ -338,6 +338,10 @@ h6, .h6 {font-size: 1em;}
 p, ul, ol, dl, pre {
     margin: 0 0 1em;
 }
+small {
+    font-size: 80%;
+    opacity: .6;
+}
 nav ul, nav ol, map ol, map ul,
 .list-inline,
 .list-inline ul,
