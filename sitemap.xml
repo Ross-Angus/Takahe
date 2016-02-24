@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/xslt/sitemap.xslt"?>
+<!-- This was an attempt to generate an XML sitemap
+https://en.wikipedia.org/wiki/Sitemaps
+Unfortunately, it probably won't work, as client-side XSLT
+doesn't seem to generate valid XML from XML. Only HTML from XML. -->
 <root></root>
