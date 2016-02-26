@@ -9,10 +9,10 @@ Takahē expects to sit in the root of a web server and assumes that the web serv
 
 index.xml can be made the default file in IIS like this:
 
-![Select your site from the left-hand pane, then in the centre pane, under the IIS heading, click on Default Document](http://i.imgur.com/mwnRHkl.png)
+![Select your site from the left-hand pane, then in the centre pane, under the IIS heading, click on Default Document](http://i.imgur.com/jBRR6PG.png)
 
-![In the Actions pane on the right-hand-side, click on Add](http://i.imgur.com/UfNRREY.png)
+![In the Actions pane on the right-hand-side, click on Add](http://i.imgur.com/Q7InVE3.png)
 
-![An Add Default Document alert box should appear. Type in index.xml into it.](http://i.imgur.com/sQrxzoW.png)
+![An Add Default Document alert box should appear. Type in index.xml into it.](http://i.imgur.com/1UxrBzA.png)
 
-![If this has been done correctly, index.xml should appear in the list of default documents, in the centre pane.](http://i.imgur.com/QYINXRd.png)
+![If this has been done correctly, index.xml should appear in the list of default documents, in the centre pane.](http://i.imgur.com/IIWig3G.png)
