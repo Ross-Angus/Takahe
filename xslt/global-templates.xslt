@@ -478,9 +478,10 @@
 	-->
     <xsl:template match="note" mode="content">
     	<sup title="{.}">
-			<label for="note{position()}">&#10054;</label>
-			<input type="checkbox" id="note{position()}" class="toggle"/>
-			<span class="details"><xsl:apply-templates select="@*|node()" mode="content"/></span>
+    			<xsl:variable name="note-no"><xsl:number count="note" level="any"/></xsl:variable>
+			<label for="note{$note-no}">&#10054;</label>
+			<input type="checkbox" id="note{$note-no}" class="toggle"/>
+			<span class="details"><xsl:copy-of select="node()"/></span>
 		</sup>
     </xsl:template>
 
